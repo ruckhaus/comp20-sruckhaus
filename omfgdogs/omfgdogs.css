@@ -1,0 +1,30 @@
+/* CSS for lab 4*/
+p {
+    display: none;
+}
+
+@media (min-width: 992px) {
+    body {
+	background-image: url("omfgdogs.gif");
+	background-repeat: repeat;
+    }
+    h1 {
+	display: none;
+    }
+
+    p {
+	display: block;
+	background: rgba(0,0,0,0.5);
+	font-family: Futura, sans-serif;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	margin-right: 10px;
+	padding: 2px;
+    }
+
+    a {
+	color: #FFFFFF;
+	text-decoration: none;
+    }
+}
