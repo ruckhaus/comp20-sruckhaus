@@ -10,8 +10,8 @@ function draw () {
 	img.addEventListener("load",function() {
 	    ctx.drawImage(img,0,270,90,130,30,210,225,325); // tree
 	    ctx.drawImage(img,0,700,900,200,0,400,800,200); // dirt road and bushes
-	    /*ctx.drawImage(); // dog
-	    ctx.drawImage(); // bird1
+	    ctx.drawImage(img,0,0,60,50,10,450,150,125); // dog
+	    /*ctx.drawImage(); // bird1
 	    ctx.drawImage(); // bird2
 	    ctx.drawImage(); // bird3
 	    ctx.drawImage(); // bird4
