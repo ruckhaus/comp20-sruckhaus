@@ -1,4 +1,4 @@
-// Sarah Ruckhaus's game.js
+q// Sarah Ruckhaus's game.js
 
 function draw () {
     var canvas = document.getElementById('game');
@@ -16,5 +16,8 @@ function draw () {
 	    ctx.drawImage(img,295,115,40,40,50,50,75,75); // bird5
 	}, false);
 	img.src = "assets/duckhunt.png";
+    }
+    else {
+	alert('Sorry, canvas is not supported on your browser.');
     }
 }
