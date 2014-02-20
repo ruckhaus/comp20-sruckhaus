@@ -6,6 +6,8 @@ function draw () {
 	var ctx = canvas.getContext('2d');
 	var img = new Image();
 	img.addEventListener("load",function() {
+	    ctx.fillStyle="#87CEEB";
+	    ctx.fillRect(0,0,800,500);
 	    ctx.drawImage(img,0,270,90,130,30,210,225,325); // tree
 	    ctx.drawImage(img,0,700,900,200,0,410,800,200); // dirt road and bushes
 	    ctx.drawImage(img,0,0,60,50,10,465,150,125); // dog
