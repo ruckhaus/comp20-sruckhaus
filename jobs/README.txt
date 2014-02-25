@@ -8,5 +8,3 @@ I'm fairly certain everything was implemented correctly (with regard to JSON; I 
 I didn't collaborate with anyone.
 
 I spent 30-45 minutes on the JSON parsing and output. CSS will probably take way longer than that.
-
-Honestly, I have no idea where that "i" came from in the jobs.html commit message. I didn't type it.
