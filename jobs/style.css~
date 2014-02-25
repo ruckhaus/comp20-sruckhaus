@@ -1,0 +1,15 @@
+/*Stylesheet for jobs.html*/
+body {
+	background-image: url("background.jpg");
+	background-repeat: repeat;
+	font-family: "Courier New", sans-serif; /*consider aligning company using tables or extra space*/
+}
+
+p {
+	background-color: #5522FF;
+	width: 625px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 1%;
+	box-shadow: 5px 5px 10px #555555;
+}
