@@ -1,4 +1,4 @@
-q// Sarah Ruckhaus's game.js
+// Sarah Ruckhaus's game.js
 
 function draw () {
     var canvas = document.getElementById('game');
