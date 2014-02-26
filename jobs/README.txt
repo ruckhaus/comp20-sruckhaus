@@ -3,7 +3,7 @@ COMP 20
 Lab 6
 4 March 2014
 
-I'm fairly certain everything was implemented correctly (with regard to JSON; I haven't done the CSS yet).
+Everything should be implemented correctly.
 
 I didn't collaborate with anyone.
 
