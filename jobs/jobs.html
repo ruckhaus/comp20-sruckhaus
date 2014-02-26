@@ -12,7 +12,7 @@
 		jobs = JSON.parse(str);
 		divList = document.getElementById("list");
 		for(i=0; i<jobs.length; i++) {
-			divList.innerHTML = divList.innerHTML + '<p>Company: ' + jobs[i]["company"] + '<br />Location: ' + jobs[i]["location"] + '<br />Position: ' + jobs[i]["position"] + '</p>';
+			divList.innerHTML = divList.innerHTML + '<p>Company: &nbsp;' + jobs[i]["company"] + '<br />Location: ' + jobs[i]["location"] + '<br />Position: ' + jobs[i]["position"] + '</p>';
 		}
 	}
 </script>
