@@ -3,15 +3,16 @@ body {
 	background-image: url("background.jpg"); /*sorry, but I had to*/
 	background-repeat: repeat;
 	background-attachment: fixed;
-	font-family: "Courier New", sans-serif; /*consider aligning company using tables or extra space*/
+	font-family: "Courier New", monospace;
 }
 
 p {
-	background-color: #ADD8FF; /*change color*/
+	background-color: #ADD8FF;
 	width: 625px;
 	margin-left: auto;
 	margin-right: auto;
 	padding: 1%;
-	border-radius: 5px;
-	box-shadow: 5px 5px 5px #111155;
+	border: 1px solid #000000;
+	border-radius: 10px;
+	box-shadow: 8px 8px 5px #111155;
 }
