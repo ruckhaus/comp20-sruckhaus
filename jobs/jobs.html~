@@ -14,6 +14,8 @@
 		for(i=0; i<jobs.length; i++) {
 			divList.innerHTML = divList.innerHTML + '<p>Company: &nbsp;' + jobs[i]["company"] + '<br />Location: ' + jobs[i]["location"] + '<br />Position: ' + jobs[i]["position"] + '</p>';
 		}
+	var body = document.getElementbyTagName("body");
+	body.innerHTML='<h1>MING CHOW</h1>' + body.innerHTML;
 	}
 </script>
 </head>
