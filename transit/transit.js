@@ -8,10 +8,11 @@ function initialize() {
 function dataReady() {
 	if(xhr.readyState==4 && xhr.status==200) {
 		scheduleData = JSON.parse(xhr.responseText);
+		console.log(scheduleData["line"];
 		//Do more stuff (get line, map stations, etc.)
 	}
 	else if (xhr.readyState==4 && xhr.status==500) {
-		//Output something
+		alert("Unable to load train data.\nThis is entirely Ming's fault. Sorry.");
 	}
 }
 
