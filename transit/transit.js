@@ -1,14 +1,20 @@
 function initialize() {
-	xhr = new XMLHttpRequest();
+	mapOptions = {
+		center: new google.maps.LatLng(42.4069, -71.1198),
+		zoom: 8
+   };
+	map = new google.maps.Map(document.getElementById("mapcanvas"),mapOptions);
+
+	/*xhr = new XMLHttpRequest();
 	xh.open("get","http://mbtamap.herokuapp.com/mapper/rodeo.json",true);
 	xhr.onreadystatechange = dataReady;
-	xhr.send(null);
+	xhr.send(null);*/
 }
 
 function dataReady() {
 	if(xhr.readyState==4 && xhr.status==200) {
 		scheduleData = JSON.parse(xhr.responseText);
-		console.log(scheduleData["line"];
+		console.log(scheduleData["line"]);
 		//Do more stuff (get line, map stations, etc.)
 	}
 	else if (xhr.readyState==4 && xhr.status==500) {
