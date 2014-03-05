@@ -1,4 +1,19 @@
-function initialize() {}
+function initialize() {
+	xhr = new XMLHttpRequest();
+	xh.open("get","http://mbtamap.herokuapp.com/mapper/rodeo.json",true);
+	xhr.onreadystatechange = dataReady;
+	xhr.send(null);
+}
+
+function dataReady() {
+	if(xhr.readyState==4 && xhr.status==200) {
+		scheduleData = JSON.parse(xhr.responseText);
+		//Do more stuff (get line, map stations, etc.)
+	}
+	else if (xhr.readyState==4 && xhr.status==500) {
+		//Output something
+	}
+}
 
 function getLocation() {
 	if(navigator.geolocation) {
@@ -8,6 +23,6 @@ function getLocation() {
 		});
 	}
 	else {
-		alert("Geolocation is not supported by your crappy browser. Sucks to suck!");
+		alert("Geolocation is not supported by your subpar browser. Sucks to suck!");
 	}
 }
