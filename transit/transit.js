@@ -22,8 +22,9 @@ function getLocation() {
 		navigator.geolocation.getCurrentPosition(function(position) {
 			lat = position.coords.latitude;
 			lng = position.coords.longitude;
+			return [lat, lng];
 		});
-		return [lat, long];
+		//return [lat, lng];
 	}
 	else {
 		alert("Geolocation is not supported by your subpar browser. Sucks to suck!");
