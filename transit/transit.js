@@ -1,10 +1,10 @@
-var lat=0;
-var lng=0;
+/*var lat=0;
+var lng=0;*/
 
 function initialize() {
-	getLocation();	
+	myLoc = getLocation();	
 	mapOptions = {
-		center: new google.maps.LatLng(lat,lng),//42.4069, -71.1198),
+		center: new google.maps.LatLng(myLoc[0],myLoc[1]),//42.4069, -71.1198),
 		zoom: 15
    };
 	map = new google.maps.Map(document.getElementById("mapcanvas"),mapOptions);
@@ -31,6 +31,7 @@ function getLocation() {
 		navigator.geolocation.getCurrentPosition(function(position) {
 			lat = position.coords.latitude;
 			lng = position.coords.longitude;
+			return [lat, lng];
 		});
 	}
 	else {
