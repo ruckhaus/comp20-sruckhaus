@@ -32,7 +32,7 @@ function renderMap() {
 	});
 	marker.setMap(map)
 	
-	google.maps.event.addListener(marker, 'click' function() {
+	google.maps.event.addListener(marker, 'click', function() {
 		infowindow.setContent(marker.title + "\n" lat + ", " + lng);
 		infowindow.open(map, marker);
 	});
