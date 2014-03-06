@@ -2,7 +2,8 @@
 var lng=0;*/
 
 function initialize() {
-	myLoc = getLocation();	
+	getLocation();
+	console.log(myLoc);
 	mapOptions = {
 		center: new google.maps.LatLng(myLoc[0],myLoc[1]),//42.4069, -71.1198),
 		zoom: 15
@@ -29,10 +30,11 @@ function dataReady() {
 function getLocation() {
 	if(navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function(position) {
-			lat = position.coords.latitude;
-			lng = position.coords.longitude;
-			console.log(lat + " " + lng);
-			return [lat, lng];
+			myLoc[0] = position.coords.latitude;
+			myLoc[1] = position.coords.longitude;
+			return myLoc;
+			/*console.log(lat + " " + lng);
+			return [lat, lng];*/
 		});
 	}
 	else {
