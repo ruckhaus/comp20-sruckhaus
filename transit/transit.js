@@ -1,7 +1,8 @@
 function initialize() {
+	getLocation();	
 	mapOptions = {
-		center: new google.maps.LatLng(42.4069, -71.1198),
-		zoom: 8
+		center: new google.maps.LatLng(lat,lng),//42.4069, -71.1198),
+		zoom: 15
    };
 	map = new google.maps.Map(document.getElementById("mapcanvas"),mapOptions);
 
