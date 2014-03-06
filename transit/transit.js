@@ -31,7 +31,7 @@ function renderMap() {
 	marker.setMap(map)
 	console.log(marker.title);
 	google.maps.event.addListener(marker, 'click', function() {
-		infowindow.setContent(marker.title + "\n" lat + ", " + lng);
+		infowindow.setContent(marker.title);
 		infowindow.open(map, marker);
 	});
 	/*xhr = new XMLHttpRequest();
