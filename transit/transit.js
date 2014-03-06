@@ -1,5 +1,3 @@
-/*var lat=0;
-var lng=0;*/
 function initialize() {
 	mapOptions = {
 		center: new google.maps.LatLng(42.4069, -71.1198),
@@ -31,11 +29,11 @@ function renderMap() {
 		title: "I am here"
 	});
 	marker.setMap(map)
-	
-	google.maps.event.addListener(marker, 'click', function() {
+	console.log(marker.title);
+	/*google.maps.event.addListener(marker, 'click', function() {
 		infowindow.setContent(marker.title + "\n" lat + ", " + lng);
 		infowindow.open(map, marker);
-	});
+	});*/
 	/*xhr = new XMLHttpRequest();
 	xh.open("get","http://mbtamap.herokuapp.com/mapper/rodeo.json",true);
 	xhr.onreadystatechange = dataReady;
