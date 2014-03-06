@@ -3,7 +3,7 @@ var lng=0;*/
 var myLoc = [];
 
 function initialize() {
-	getLocation();
+	myLoc = getLocation();
 	console.log(myLoc);
 	mapOptions = {
 		center: new google.maps.LatLng(myLoc[0],myLoc[1]),//42.4069, -71.1198),
@@ -17,6 +17,19 @@ function initialize() {
 	xhr.send(null);*/
 }
 
+function getLocation() {
+	if(navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(function(position) {
+			lat = position.coords.latitude;
+			lng = position.coords.longitude;
+		});
+		return [lat, long];
+	}
+	else {
+		alert("Geolocation is not supported by your subpar browser. Sucks to suck!");
+	}
+}
+
 function dataReady() {
 	if(xhr.readyState==4 && xhr.status==200) {
 		scheduleData = JSON.parse(xhr.responseText);
@@ -25,20 +38,5 @@ function dataReady() {
 	}
 	else if (xhr.readyState==4 && xhr.status==500) {
 		alert("Unable to load train data.\nThis is entirely Ming's fault. Sorry.");
-	}
-}
-
-function getLocation() {
-	if(navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(function(position) {
-			myLoc[0] = position.coords.latitude;
-			myLoc[1] = position.coords.longitude;
-			return myLoc;
-			/*console.log(lat + " " + lng);
-			return [lat, lng];*/
-		});
-	}
-	else {
-		alert("Geolocation is not supported by your subpar browser. Sucks to suck!");
 	}
 }
