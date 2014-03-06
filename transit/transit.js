@@ -1,3 +1,6 @@
+var lat=0;
+var lng=0;
+
 function initialize() {
 	getLocation();	
 	mapOptions = {
