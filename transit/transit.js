@@ -30,10 +30,12 @@ function renderMap() {
 	});
 	marker.setMap(map)
 	console.log(marker.title);
+	var infoWindow = new google.maps.InfoWindow();
 	google.maps.event.addListener(marker, 'click', function() {
-		infowindow.setContent(marker.title);
-		infowindow.open(map, marker);
+		infoWindow.setContent(marker.title);
+		infoWindow.open(map, marker);
 	});
+
 	/*xhr = new XMLHttpRequest();
 	xh.open("get","http://mbtamap.herokuapp.com/mapper/rodeo.json",true);
 	xhr.onreadystatechange = dataReady;
