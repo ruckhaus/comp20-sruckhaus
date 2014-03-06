@@ -1,5 +1,6 @@
 /*var lat=0;
 var lng=0;*/
+var myLoc = [];
 
 function initialize() {
 	getLocation();
