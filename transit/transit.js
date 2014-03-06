@@ -22,7 +22,7 @@ function getLocation() {
 
 function renderMap() {
 	console.log(lat + ' ' + lng);
-	myLoc = new google.mapsLatLng(lat, lng);
+	myLoc = new google.maps.LatLng(lat, lng);
 	map.panTo(myLoc);
 	marker = new google.maps.Marker({
 		position: myLoc,
@@ -30,10 +30,10 @@ function renderMap() {
 	});
 	marker.setMap(map)
 	console.log(marker.title);
-	/*google.maps.event.addListener(marker, 'click', function() {
+	google.maps.event.addListener(marker, 'click', function() {
 		infowindow.setContent(marker.title + "\n" lat + ", " + lng);
 		infowindow.open(map, marker);
-	});*/
+	});
 	/*xhr = new XMLHttpRequest();
 	xh.open("get","http://mbtamap.herokuapp.com/mapper/rodeo.json",true);
 	xhr.onreadystatechange = dataReady;
