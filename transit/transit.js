@@ -1,20 +1,12 @@
 /*var lat=0;
 var lng=0;*/
-var myLoc = [];
-
 function initialize() {
-	myLoc = getLocation();
-	console.log(myLoc);
 	mapOptions = {
-		center: new google.maps.LatLng(myLoc[0],myLoc[1]),//42.4069, -71.1198),
+		center: new google.maps.LatLng(42.4069, -71.1198),
 		zoom: 15
    };
 	map = new google.maps.Map(document.getElementById("mapcanvas"),mapOptions);
-
-	/*xhr = new XMLHttpRequest();
-	xh.open("get","http://mbtamap.herokuapp.com/mapper/rodeo.json",true);
-	xhr.onreadystatechange = dataReady;
-	xhr.send(null);*/
+	getLocation();
 }
 
 function getLocation() {
@@ -22,13 +14,20 @@ function getLocation() {
 		navigator.geolocation.getCurrentPosition(function(position) {
 			lat = position.coords.latitude;
 			lng = position.coords.longitude;
-			return [lat, lng];
+			renderMap();
 		});
-		//return [lat, lng];
 	}
 	else {
 		alert("Geolocation is not supported by your subpar browser. Sucks to suck!");
 	}
+}
+
+function renderMap() {
+	console.log(lat + ' ' + lng);
+	/*xhr = new XMLHttpRequest();
+	xh.open("get","http://mbtamap.herokuapp.com/mapper/rodeo.json",true);
+	xhr.onreadystatechange = dataReady;
+	xhr.send(null);*/
 }
 
 function dataReady() {
