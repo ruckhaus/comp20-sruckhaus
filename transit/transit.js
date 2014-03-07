@@ -1,6 +1,6 @@
 function initialize() {
 	mapOptions = {
-		center: new google.maps.LatLng(42.4069, -71.1198),
+		center: new google.maps.LatLng(42.3581, -71.0636), //center in Boston
 		zoom: 15
    };
 	map = new google.maps.Map(document.getElementById("mapcanvas"),mapOptions);
@@ -26,7 +26,8 @@ function renderMap() {
 	map.panTo(myLoc);
 	marker = new google.maps.Marker({
 		position: myLoc,
-		title: "I am here"
+		animation: google.maps.Animation.DROP,
+		title: "Current Location"
 	});
 	marker.setMap(map)
 	console.log(marker.title);
