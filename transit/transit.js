@@ -42,7 +42,7 @@ function renderMap() {
 	});
 
 	xhr = new XMLHttpRequest();
-	xh.open("get","http://mbtamap.herokuapp.com/mapper/rodeo.json",true);
+	xhr.open("get","http://mbtamap.herokuapp.com/mapper/rodeo.json",true);
 	xhr.onreadystatechange = dataReady;
 	xhr.send(null);
 }
