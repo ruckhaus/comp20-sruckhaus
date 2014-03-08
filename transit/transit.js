@@ -2,7 +2,7 @@ str = '[{"line":"Blue","station":"Airport","lat":42.374262,"lng":-71.030395},{"l
 
 function initialize() {
 	stations=JSON.parse(str);
-	console.log(stations['line']);
+	console.log(stations[0]['line']);
 	mapOptions = {
 		center: new google.maps.LatLng(42.3581, -71.0636), //center in Boston
 		zoom: 15
@@ -35,9 +35,10 @@ function renderMap() {
 	});
 	marker.setMap(map)
 	console.log(marker.title);
-	var infoWindow = new google.maps.InfoWindow();
+	initInfoContent = '<h3>Current Location:</h3>' + '<p>' + lat + ', ' + lng + '</p>';
+	infoWindow = new google.maps.InfoWindow();
 	google.maps.event.addListener(marker, 'click', function() {
-		infoWindow.setContent(marker.title);
+		infoWindow.setContent(initInfoContent);
 		infoWindow.open(map, marker);
 	});
 
