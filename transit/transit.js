@@ -53,9 +53,29 @@ function dataReady() {
 		console.log('Line given: ' + scheduleData["line"]);
 		stations = JSON.parse(str);
 		console.log('GOT STATIONS ' + stations[0]['line']);
-		//Do more stuff (get line, map stations, etc.)
+		drawLine();
 	}
 	else if (xhr.readyState==4 && xhr.status==500) {
 		alert("Unable to load train data.\nThis is entirely Ming's fault. Sorry.");
 	}
+}
+
+function drawLine() {
+	switch(scheduleData['line']) {
+			case 'red':
+				lineColor = '#AA0000';
+				stationMark = '/assets/redt.png';
+				break;
+			case 'orange':
+				lineColor = '#D45500';
+				stationMark = '/assets/oranget.png';
+				break;
+			case 'blue':
+				lineColor = '#0044AA';
+				stationMark = '/assets/bluet.png';
+				break;
+			default:
+				alert("Houston, we have a problem.");
+	}
+	//Do more stuff (get line, map stations, etc.)
 }
