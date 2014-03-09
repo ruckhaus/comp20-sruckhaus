@@ -85,7 +85,10 @@ function drawLine() {
 	};
 	j=0; //counter for marker array
 	linePath=[];
-	stopName = [];
+	stopMarker = []; //should probably make all of this an object
+	stopName = [];	  //but right now I'm trying to get the concept down
+	stopWindow = [];
+	stopContent = [];
 	for (var i = 0; i < stations.length; i++) {
 		if (stations[i]['line'] == lineName) {
 			tStop = new google.maps.LatLng(stations[i]['lat'],stations[i]['lng']);
