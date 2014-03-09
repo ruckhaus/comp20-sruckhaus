@@ -168,7 +168,7 @@ function findNearest() {
 		infoWindow.open(map, marker);
 	});
 
-	dLine = [myLoc, linePath[nIndex];
+	dLine = [myLoc, linePath[nIndex]];
 	distLine = new google.maps.Polyline ({
 		path: dLine,
 		geodesic: true,
