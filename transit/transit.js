@@ -165,7 +165,7 @@ function findNearest() {
 	google.maps.event.addListener(marker, 'click', function() {
 		infoWindow.setContent(initInfoContent + nearestContent);
 		infoWindow.open(map, marker);
-	}
+	});
 }
 
 function haversine(lat1, lon1, lat2, lon2) {
