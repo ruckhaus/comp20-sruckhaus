@@ -89,7 +89,7 @@ function drawLine() {
 	for (var i = 0; i < stations.length; i++) {
 		if (stations[i]['line'] == lineName) {
 			tStop = new google.maps.LatLng(stations[i]['lat'],stations[i]['lng']);
-			stopMarker = new google.maps.Marker ({
+			stopMarker[j] = new google.maps.Marker ({
 				position: tStop,
 				map: map,
 				title: stations[i]['station'],
@@ -97,11 +97,11 @@ function drawLine() {
 			});
 			linePath[j] = tStop;
 			stopName[j] = stopMarker.title;
-			stopWindow = new google.maps.InfoWindow();
-			stopContent = '<h3>' + stopMarker.title + ' Station</h3>'
-			google.maps.event.addListener(stopMarker, 'click', function() {
-				infoWindow.setContent(stopContent);
-				infoWindow.open(map, stopMarker);
+			stopWindow[j] = new google.maps.InfoWindow();
+			stopContent[j] = '<h3>' + stopMarker[j].title + ' Station</h3>'
+			google.maps.event.addListener(stopMarker[j], 'click', function() {
+				infoWindow.setContent(stopContent[j]);
+				infoWindow.open(map, stopMarker[j]);
 			});
 			j++;
 		}
