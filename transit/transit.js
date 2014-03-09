@@ -23,7 +23,6 @@ function getLocation() {
 }
 
 function renderMap() {
-	console.log(lat + ' ' + lng);
 	myLoc = new google.maps.LatLng(lat, lng);
 	map.panTo(myLoc);
 	marker = new google.maps.Marker({
@@ -32,7 +31,6 @@ function renderMap() {
 		title: "Current Location"
 	});
 	marker.setMap(map)
-	console.log(marker.title);
 	initInfoContent = '<h3>Current Location:</h3>' + '<p>' + lat + ', ' + lng + '</p>';
 	//FIGURE OUT HOW TO GET ADDRESS FROM LATLNG
 	infoWindow = new google.maps.InfoWindow();
@@ -80,11 +78,9 @@ function drawLine() {
 			default:
 				alert("Houston, we have a problem.");
 	}
-	for (var key in stations) {
-		if(key == 'line') {
-			console.log(stations[key]);
-			if (stations['line'] == lineName) {
-				console.log("Found the line");
+	for (var i = 0; i < stations.length; i++) {
+			if (stations[i]['line'] == lineName) {
+				console.log("Found the line: " + stations[i][lat]);
 				//add markers
 			}
 		}
