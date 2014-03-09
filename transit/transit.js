@@ -162,7 +162,10 @@ function findNearest() {
 		}
 	}
 	nearestContent = '<p>The nearest station is ' + nStop + ', which is ' + nearest + ' miles away.</p>';
-	infoWindow.setContent(initInfoContent + nearestContent);
+	google.maps.event.addListener(marker, 'click', function() {
+		infoWindow.setContent(initInfoContent + nearestContent);
+		infoWindow.open(map, marker);
+	}
 }
 
 function haversine(lat1, lon1, lat2, lon2) {
