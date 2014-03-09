@@ -50,7 +50,7 @@ function dataReady() {
 		scheduleData = JSON.parse(xhr.responseText);
 		console.log('Line given: ' + scheduleData["line"]);
 		stations = JSON.parse(str);
-		console.log('GOT STATIONS ' + stations[0]['line']);
+		console.log('GOT STATIONS');
 		drawLine();
 	}
 	else if (xhr.readyState==4 && xhr.status==500) {
@@ -91,6 +91,7 @@ function drawLine() {
 			tStop = new google.maps.LatLng(stations[i]['lat'],stations[i]['lng']);
 			stopMarker = new google.maps.Marker ({
 				position: tStop,
+				map: map,
 				icon: stationMark 
 			});
 			linePath[j]=tStop;
