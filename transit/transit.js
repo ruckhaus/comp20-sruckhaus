@@ -81,7 +81,7 @@ function drawLine() {
 	stationMark = {
 		url: sign,
 		origin: new google.maps.Point(0,0),
-		anchor: new google.maps.Point(10,40)
+		anchor: new google.maps.Point(3,12)
 	};
 	j=0; //counter for marker array
 	linePath=[];
