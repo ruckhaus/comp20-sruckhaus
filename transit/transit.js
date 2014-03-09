@@ -80,7 +80,7 @@ function drawLine() {
 	}
 	stationMark = {
 		url: sign,
-		size: new google.maps.Size(10,20);
+		size: new google.maps.Size(10,20),
 		origin: new google.maps.Point(0,0),
 		anchor: new google.maps.Point(5,20)
 	};
