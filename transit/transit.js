@@ -85,14 +85,11 @@ function drawLine() {
 	};
 	j=0; //counter for marker array
 	linePath=[];
-	stopMarker = []; //should probably make all of this an object
-	stopName = [];	  //but right now I'm trying to get the concept down
-	stopWindow = [];
-	stopContent = [];
+	stopName = [];
 	for (var i = 0; i < stations.length; i++) {
 		if (stations[i]['line'] == lineName) {
 			tStop = new google.maps.LatLng(stations[i]['lat'],stations[i]['lng']);
-			stopMarker[j] = new google.maps.Marker ({
+			stopMarker = new google.maps.Marker ({
 				position: tStop,
 				map: map,
 				title: stations[i]['station'],
@@ -100,11 +97,11 @@ function drawLine() {
 			});
 			linePath[j] = tStop;
 			stopName[j] = stopMarker.title;
-			stopWindow[j] = new google.maps.InfoWindow();
-			stopContent[j] = '<h3>' + stopMarker[j].title + ' Station</h3>'
-			google.maps.event.addListener(stopMarker[j], 'click', function() {
-				stopWindow[j].setContent(stopContent[j]);
-				stopWindow[j].open(map, stopMarker[j]);
+			stopWindow = new google.maps.InfoWindow();
+			stopContent = '<h3>' + this.title + ' Station</h3>'
+			google.maps.event.addListener(stopMarker, 'click', function() {
+				stopWindow.setContent(stopContent);
+				stopWindow.open(map, this);
 			});
 			j++;
 		}
