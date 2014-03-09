@@ -48,9 +48,8 @@ function renderMap() {
 function dataReady() {
 	if(xhr.readyState==4 && xhr.status==200) {
 		scheduleData = JSON.parse(xhr.responseText);
-		console.log('Line given: ' + scheduleData["line"]);
+		console.log('Line given: ' + scheduleData["line"]);//DELETE ME
 		stations = JSON.parse(str);
-		console.log('GOT STATIONS');
 		drawLine();
 	}
 	else if (xhr.readyState==4 && xhr.status==500) {
@@ -79,12 +78,13 @@ function drawLine() {
 				alert("Houston, we have a problem.");
 	}
 	stationMark = {
-		url: sign, //CANT SEE SIGNPOST AT CURRENT SIZE
+		url: sign,
 		origin: new google.maps.Point(0,0),
-		anchor: new google.maps.Point(7,28)
+		anchor: new google.maps.Point(8,32)
 	};
-	j=0; //counter for marker array
+	j=0; //counter for path and name arrays
 	linePath=[];
+	stopName = [];
 	for (var i = 0; i < stations.length; i++) {
 		if (stations[i]['line'] == lineName) {
 			tStop = new google.maps.LatLng(stations[i]['lat'],stations[i]['lng']);
@@ -94,7 +94,14 @@ function drawLine() {
 				title: stations[i]['station'],
 				icon: stationMark 
 			});
-			linePath[j]=tStop;
+			linePath[j] = tStop;
+			stopName[j] = stopMarker.title;
+			stopWindow = new google.maps.InfoWindow();
+			//stopContent = '<h3>' + stopMarker.title + ' Station</h3>'
+			google.maps.event.addListener(stopMarker, 'click', function() {
+				stopWindow.setContent('<h3>' + this.title + ' Station</h3>');
+				stopWindow.open(map, this);
+			});
 			j++;
 		}
 	}
@@ -117,7 +124,7 @@ function drawLine() {
 				geodesic: true,
 				strokeColor: lineColor,
 				strokeOpacity: 1.0,
-				strokeWeight: 2,
+				strokeWeight: 3,
 				map: map
 			});
 			bLine = new google.maps.Polyline ({
@@ -125,7 +132,7 @@ function drawLine() {
 				geodesic: true,
 				strokeColor: lineColor,
 				strokeOpacity: 1.0,
-				strokeWeight: 2,
+				strokeWeight: 3,
 				map: map
 			});
 	}
@@ -135,9 +142,64 @@ function drawLine() {
 			geodesic: true,
 			strokeColor: lineColor,
 			strokeOpacity: 1.0,
-			strokeWeight: 2,
+			strokeWeight: 3,
 			map: map
 		});
 	}
-	//Do more stuff (draw line)
+	findNearest();
+}
+
+function findNearest() {
+	nearest = 25000; // Earth's circumference is 24,901 miles
+	nStop = 'a';     // nearest stop
+	nIndex = 50;     // no line has 50 stops (arbitrary)
+	for (var i = 0; i<linePath.length; i++) {
+		dist = haversine(myLoc.d,myLoc.e,linePath[i].d,linePath[i].e);
+		if (dist < nearest) {
+			nearest = dist;
+			nStop = stopName[i];
+			nIndex = i;
+		}
+	}
+	nearest = nearest.round(3);
+	nearestContent = '<p>The nearest station is ' + nStop + ', which is ' + nearest + ' miles away.</p>';
+	google.maps.event.addListener(marker, 'click', function() {
+		infoWindow.setContent(initInfoContent + nearestContent);
+		infoWindow.open(map, marker);
+	});
+
+	dLine = [myLoc, linePath[nIndex]];
+	distLine = new google.maps.Polyline ({
+		path: dLine,
+		geodesic: true,
+		strokeColor: '#404040',
+		strokeOpacity: 1.0,
+		strokeWeight: 8,
+		map: map
+	});
+}
+
+function haversine(lat1, lon1, lat2, lon2) {
+	//Haversine formula from movable-type.co.uk
+	var R = 3963.1676; // miles
+	var dLat = (lat2-lat1);
+	dLat = toRad(dLat)
+	var dLon = (lon2-lon1);
+	dLon = toRad(dLon);
+	var lat1 = toRad(lat1);
+	var lat2 = toRad(lat2);
+
+	var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+			  Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
+	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+	var d = R * c;
+	return d;
+}
+
+function toRad(num) {
+	return num * Math.PI/180;
+}
+
+Number.prototype.round = function(places) {
+	return +(Math.round(this + "e+" + places)  + "e-" + places);
 }
