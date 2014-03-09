@@ -167,6 +167,16 @@ function findNearest() {
 		infoWindow.setContent(initInfoContent + nearestContent);
 		infoWindow.open(map, marker);
 	});
+
+	dLine = [myLoc, linePath[nIndex];
+	distLine = new google.maps.Polyline ({
+		path: dLine,
+		geodesic: true,
+		strokeColor: '#404040',
+		strokeOpacity: 1.0,
+		strokeWeight: 8,
+		map: map
+	});
 }
 
 function haversine(lat1, lon1, lat2, lon2) {
