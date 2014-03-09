@@ -101,10 +101,10 @@ function drawLine() {
 	if(lineName == 'Red') {
 			ashLine = [];
 			brtLine = [];
-			brtLine[0] = linePath[11]; //start Braintree line at JFK/Umass
+			brtLine[0] = linePath[12]; //start Braintree line at JFK/Umass
 			b = 1;
 			for (var i = 0; i <= linePath.length; i++) {
-				if(i <= 15) {
+				if(i <= 16) {
 					ashLine[i] = linePath[i]; //Ashmont branch
 				}
 				else {
