@@ -161,6 +161,7 @@ function findNearest() {
 			nIndex = i;
 		}
 	}
+	nearest = nearest.round(3);
 	nearestContent = '<p>The nearest station is ' + nStop + ', which is ' + nearest + ' miles away.</p>';
 	google.maps.event.addListener(marker, 'click', function() {
 		infoWindow.setContent(initInfoContent + nearestContent);
@@ -187,4 +188,8 @@ function haversine(lat1, lon1, lat2, lon2) {
 
 function toRad(num) {
 	return num * Math.PI/180;
+}
+
+Number.prototype.round = function(places) {
+	return +(Math.round(this + "e+" + places)  + "e-" + places);
 }
