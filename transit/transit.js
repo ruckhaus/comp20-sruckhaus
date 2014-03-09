@@ -63,27 +63,40 @@ function drawLine() {
 			case 'red':
 				lineName = 'Red';
 				lineColor = '#AA0000';
-				stationMark = '/assets/redt.png';
+				sign = '/assets/redt.png';
 				break;
 			case 'orange':
 				lineName = 'Orange';
 				lineColor = '#D45500';
-				stationMark = '/assets/oranget.png';
+				sign = '/assets/oranget.png';
 				break;
 			case 'blue':
 				lineName = 'Blue';
 				lineColor = '#0044AA';
-				stationMark = '/assets/bluet.png';
+				sign = '/assets/bluet.png';
 				break;
 			default:
 				alert("Houston, we have a problem.");
 	}
+	stationMark = {
+		url: sign,
+		origin: new google.maps.Point(0,0),
+		anchor: new google.maps.Point(25,100)
+	};
+	j=0; //counter for marker array
+	linePath=[];
 	for (var i = 0; i < stations.length; i++) {
 		if (stations[i]['line'] == lineName) {
-			console.log("Found the line: " + stations[i][lat]);
-			//add markers
+			console.log(j);
+			tStop = new google.maps.LatLng(stations[i]['lat'],stations[i]['lng']);
+			stopMarker = new google.maps.Marker ({
+				position: tStop,
+				icon: stationMark 
+			});
+			linePath[j]=tStop;
+			j++;
 		}
 	}
 
-	//Do more stuff (get line, map stations, etc.)
+	//Do more stuff (draw line)
 }
