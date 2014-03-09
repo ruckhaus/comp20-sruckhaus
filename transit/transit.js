@@ -101,7 +101,7 @@ function drawLine() {
 			stopContent = '<h3>' + stopMarker.title + ' Station</h3>'
 			google.maps.event.addListener(stopMarker, 'click', function() {
 				infoWindow.setContent(stopContent);
-				infoWindow.open(map, StopMarker);
+				infoWindow.open(map, stopMarker);
 			});
 			j++;
 		}
