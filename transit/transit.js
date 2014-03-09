@@ -63,19 +63,32 @@ function dataReady() {
 function drawLine() {
 	switch(scheduleData['line']) {
 			case 'red':
+				lineName = 'Red';
 				lineColor = '#AA0000';
 				stationMark = '/assets/redt.png';
 				break;
 			case 'orange':
+				lineName = 'Orange';
 				lineColor = '#D45500';
 				stationMark = '/assets/oranget.png';
 				break;
 			case 'blue':
+				lineName = 'Blue';
 				lineColor = '#0044AA';
 				stationMark = '/assets/bluet.png';
 				break;
 			default:
 				alert("Houston, we have a problem.");
 	}
+	for (var key in stations) {
+		if(key == 'line') {
+			console.log(stations[key]);
+			if (stations['line'] == lineName) {
+				console.log("Found the line");
+				//add markers
+			}
+		}
+	}
+
 	//Do more stuff (get line, map stations, etc.)
 }
