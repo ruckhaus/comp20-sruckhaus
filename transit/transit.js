@@ -99,6 +99,7 @@ function drawLine() {
 		}
 	}
 	if(lineName == 'Red') {
+			ashLine = [];
 			brtLine = [];
 			brtLine[0] = linePath[11]; //start Braintree line at JFK/Umass
 			b = 1;
