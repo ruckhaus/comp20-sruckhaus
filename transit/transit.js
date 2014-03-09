@@ -81,23 +81,30 @@ function drawLine() {
 	stationMark = {
 		url: sign,
 		origin: new google.maps.Point(0,0),
-		anchor: new google.maps.Point(3,12)
+		anchor: new google.maps.Point(7,28)
 	};
 	j=0; //counter for marker array
 	linePath=[];
 	for (var i = 0; i < stations.length; i++) {
 		if (stations[i]['line'] == lineName) {
-			console.log(j);
 			tStop = new google.maps.LatLng(stations[i]['lat'],stations[i]['lng']);
 			stopMarker = new google.maps.Marker ({
 				position: tStop,
 				map: map,
+				title: stations[i]['station'],
 				icon: stationMark 
 			});
 			linePath[j]=tStop;
 			j++;
 		}
 	}
-
+	tLine = new google.maps.Polyline({
+		path: linePath,
+		geodesic: true,
+		strokeColor: lineColor,
+		strokeOpacity: 1.0,
+		strokeWeight: 2,
+		map: map
+	});
 	//Do more stuff (draw line)
 }
