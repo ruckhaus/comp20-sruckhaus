@@ -48,9 +48,8 @@ function renderMap() {
 function dataReady() {
 	if(xhr.readyState==4 && xhr.status==200) {
 		scheduleData = JSON.parse(xhr.responseText);
-		console.log('Line given: ' + scheduleData["line"]);
+		console.log('Line given: ' + scheduleData["line"]);//DELETE ME
 		stations = JSON.parse(str);
-		console.log('GOT STATIONS');
 		drawLine();
 	}
 	else if (xhr.readyState==4 && xhr.status==500) {
@@ -83,7 +82,7 @@ function drawLine() {
 		origin: new google.maps.Point(0,0),
 		anchor: new google.maps.Point(8,32)
 	};
-	j=0; //counter for marker array
+	j=0; //counter for path and name arrays
 	linePath=[];
 	stopName = [];
 	for (var i = 0; i < stations.length; i++) {
@@ -125,7 +124,7 @@ function drawLine() {
 				geodesic: true,
 				strokeColor: lineColor,
 				strokeOpacity: 1.0,
-				strokeWeight: 2,
+				strokeWeight: 3,
 				map: map
 			});
 			bLine = new google.maps.Polyline ({
@@ -133,7 +132,7 @@ function drawLine() {
 				geodesic: true,
 				strokeColor: lineColor,
 				strokeOpacity: 1.0,
-				strokeWeight: 2,
+				strokeWeight: 3,
 				map: map
 			});
 	}
@@ -143,8 +142,38 @@ function drawLine() {
 			geodesic: true,
 			strokeColor: lineColor,
 			strokeOpacity: 1.0,
-			strokeWeight: 2,
+			strokeWeight: 3,
 			map: map
 		});
 	}
+	//findNearest();
+}
+
+function findNearest() {
+	nearest = 25000; // Earth's circumference is 24,901 miles
+	nStop = 'a';     // nearest stop
+	nIndex = 50;     // no line has 50 stops (arbitrary)
+	for (var i = 0; i<linePath.length; i++) {
+		dist = haversine(myLoc.d,myLoc.e,linePath[i].d,linePath[i].e);
+		if (dist < nearest) {
+			nearest = dist;
+			nStop = stopName[i];
+			nIndex = i;
+		}
+	}
+}
+
+function haversine(lat1, lon1, lat2, lon2) {
+	//Haversine formula from movable-type.co.uk
+	var R = 3963.1676; // miles
+	var dLat = (lat2-lat1).toRad();
+	var dLon = (lon2-lon1).toRad();
+	var lat1 = lat1.toRad();
+	var lat2 = lat2.toRad();
+
+	var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+			  Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
+	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+	var d = R * c;
+	return d;
 }
