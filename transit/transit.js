@@ -79,10 +79,9 @@ function drawLine() {
 				alert("Houston, we have a problem.");
 	}
 	for (var i = 0; i < stations.length; i++) {
-			if (stations[i]['line'] == lineName) {
-				console.log("Found the line: " + stations[i][lat]);
-				//add markers
-			}
+		if (stations[i]['line'] == lineName) {
+			console.log("Found the line: " + stations[i][lat]);
+			//add markers
 		}
 	}
 
