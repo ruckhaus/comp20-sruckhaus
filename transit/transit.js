@@ -102,14 +102,14 @@ function drawLine() {
 			ashLine = [];
 			brtLine = [];
 			brtLine[0] = linePath[12]; //start Braintree line at JFK/Umass
-			b = 1;
+			b = 0;
 			for (var i = 0; i < linePath.length; i++) {
 				if(i <= 16) {
 					ashLine[i] = linePath[i]; //Ashmont branch
 				}
 				else {
-					brtLine[b] = linePath[i];
 					b++;
+					brtLine[b] = linePath[i];
 				}
 			}
 			aLine = new google.maps.Polyline ({
