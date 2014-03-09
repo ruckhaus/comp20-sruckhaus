@@ -161,7 +161,7 @@ function findNearest() {
 			nIndex = i;
 		}
 	}
-	nearestContent = '<p>The nearest station is ' + nStop + ', which is ' + nearest + ' miles away.</p>'
+	nearestContent = '<p>The nearest station is ' + nStop + ', which is ' + nearest + ' miles away.</p>';
 	infoWindow.setContent(initInfoContent + nearestContent);
 }
 
