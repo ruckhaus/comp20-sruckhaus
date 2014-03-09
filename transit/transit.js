@@ -98,7 +98,7 @@ function drawLine() {
 			linePath[j] = tStop;
 			stopName[j] = stopMarker.title;
 			stopWindow = new google.maps.InfoWindow();
-			stopContent = '<h3>' + this.title + ' Station</h3>'
+			stopContent = '<h3>' + stopMarker.title + ' Station</h3>'
 			google.maps.event.addListener(stopMarker, 'click', function() {
 				stopWindow.setContent(stopContent);
 				stopWindow.open(map, this);
