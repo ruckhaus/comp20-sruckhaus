@@ -166,14 +166,20 @@ function findNearest() {
 function haversine(lat1, lon1, lat2, lon2) {
 	//Haversine formula from movable-type.co.uk
 	var R = 3963.1676; // miles
-	var dLat = (lat2-lat1).toRad();
-	var dLon = (lon2-lon1).toRad();
-	var lat1 = lat1.toRad();
-	var lat2 = lat2.toRad();
+	var dLat = (lat2-lat1);
+	dLat = toRad(dLat)
+	var dLon = (lon2-lon1);
+	dLon = toRad(dLon);
+	var lat1 = toRad(lat1);
+	var lat2 = toRad(lat2);
 
 	var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
 			  Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
 	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
 	var d = R * c;
 	return d;
+}
+
+function toRad(num) {
+	return num * Math.PI/180;
 }
