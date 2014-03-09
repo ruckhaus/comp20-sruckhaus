@@ -79,12 +79,13 @@ function drawLine() {
 				alert("Houston, we have a problem.");
 	}
 	stationMark = {
-		url: sign, //CANT SEE SIGNPOST AT CURRENT SIZE
+		url: sign,
 		origin: new google.maps.Point(0,0),
-		anchor: new google.maps.Point(7,28)
+		anchor: new google.maps.Point(8,32)
 	};
 	j=0; //counter for marker array
 	linePath=[];
+	stopName = [];
 	for (var i = 0; i < stations.length; i++) {
 		if (stations[i]['line'] == lineName) {
 			tStop = new google.maps.LatLng(stations[i]['lat'],stations[i]['lng']);
@@ -94,7 +95,14 @@ function drawLine() {
 				title: stations[i]['station'],
 				icon: stationMark 
 			});
-			linePath[j]=tStop;
+			linePath[j] = tStop;
+			stopName[j] = stopMarker.title;
+			stopWindow = new google.maps.InfoWindow();
+			stopContent = '<h3>' + stopMarker.title + ' Station</h3>'
+			google.maps.event.addListener(stopMarker, 'click', function() {
+				infoWindow.setContent(stopContent);
+				infoWindow.open(map, StopMarker);
+			});
 			j++;
 		}
 	}
@@ -139,5 +147,4 @@ function drawLine() {
 			map: map
 		});
 	}
-	//Do more stuff (draw line)
 }
