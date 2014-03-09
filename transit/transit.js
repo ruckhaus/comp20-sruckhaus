@@ -146,7 +146,7 @@ function drawLine() {
 			map: map
 		});
 	}
-	//findNearest();
+	findNearest();
 }
 
 function findNearest() {
