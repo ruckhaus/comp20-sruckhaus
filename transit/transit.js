@@ -77,8 +77,7 @@ function drawLine() {
 			default:
 				alert("Houston, we have a problem.");
 	}
-	pageTitle = document.getElementsByTagName('title');
-	pageTitle.innerHTML = 'Nearest ' + lineName + ' station';
+	document.title = 'Nearest ' + lineName + ' station';
 	stationMark = {
 		url: sign,
 		origin: new google.maps.Point(0,0),
