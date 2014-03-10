@@ -8,6 +8,7 @@ COMP 20 Assignment 3
  and using the xhr request. So far, it works.
 -3/8: I spent roughly 2 hours on adding station markers and playing connect the dots.
 -3/9: 2 hours on info windows and Haversine formula
+-3/10: 0.5 hours on mostly aesthetics
 
 People collaborated with: 0
 Total hours spent:
