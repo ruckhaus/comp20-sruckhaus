@@ -77,6 +77,8 @@ function drawLine() {
 			default:
 				alert("Houston, we have a problem.");
 	}
+	pageTitle = document.getElementsByTagName('title');
+	pageTitle.innerHTML = 'Nearest ' + lineName + ' station';
 	stationMark = {
 		url: sign,
 		origin: new google.maps.Point(0,0),
@@ -180,7 +182,7 @@ function findNearest() {
 }
 
 function haversine(lat1, lon1, lat2, lon2) {
-	//Haversine formula from movable-type.co.uk
+	// Haversine formula from movable-type.co.uk
 	var R = 3963.1676; // miles
 	var dLat = (lat2-lat1);
 	dLat = toRad(dLat)
