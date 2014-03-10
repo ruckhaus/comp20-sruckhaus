@@ -51,7 +51,7 @@ function dataReady() {
 		drawLine();
 	}
 	else if (xhr.readyState==4 && xhr.status==500) {
-		alert("Unable to load train data.\nThis is entirely Ming's fault. Sorry.\n Refresh and try again.");
+		alert("Unable to load train data.\nThis is entirely Ming's fault. Sorry.\nRefresh and try again.");
 	}
 }
 
@@ -96,9 +96,8 @@ function drawLine() {
 			linePath[j] = tStop;
 			stopName[j] = stopMarker.title;
 			stopWindow = new google.maps.InfoWindow();
-			//stopContent = '<h3>' + stopMarker.title + ' Station</h3>'
 			google.maps.event.addListener(stopMarker, 'click', function() {
-				stopWindow.setContent('<h3>' + this.title + ' Station</h3>');
+				stopWindow.setContent('<h3>' + this.title + '</h3>');
 				stopWindow.open(map, this);
 			});
 			j++;
@@ -162,10 +161,8 @@ function findNearest() {
 	}
 	nearest = nearest.round(3);
 	nearestContent = '<p>The nearest station is <span class="bold">' + nStop + '</span>, which is ' + nearest + ' miles away.</p>';
-	//google.maps.event.addListener(marker, 'click', function() {
-		infoWindow.setContent(initInfoContent + nearestContent);
-		infoWindow.open(map, marker);
-	//});
+	infoWindow.setContent(initInfoContent + nearestContent);
+	infoWindow.open(map, marker);
 
 	dLine = [myLoc, linePath[nIndex]];
 	distLine = new google.maps.Polyline ({
