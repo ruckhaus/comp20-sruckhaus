@@ -34,10 +34,10 @@ function renderMap() {
 	initInfoContent = '<h3>Current Location:</h3>' + '<p>' + lat + ', ' + lng + '</p>';
 	//FIGURE OUT HOW TO GET ADDRESS FROM LATLNG
 	infoWindow = new google.maps.InfoWindow();
-	google.maps.event.addListener(marker, 'click', function() {
+	//google.maps.event.addListener(marker, 'click', function() {
 		infoWindow.setContent(initInfoContent);
 		infoWindow.open(map, marker);
-	});
+	//});
 
 	xhr = new XMLHttpRequest();
 	xhr.open("get","http://mbtamap.herokuapp.com/mapper/rodeo.json",true);
@@ -53,7 +53,7 @@ function dataReady() {
 		drawLine();
 	}
 	else if (xhr.readyState==4 && xhr.status==500) {
-		alert("Unable to load train data.\nThis is entirely Ming's fault. Sorry.");
+		alert("Unable to load train data.\nThis is entirely Ming's fault. Sorry.\n Refresh and try again.");
 	}
 }
 
@@ -162,19 +162,19 @@ function findNearest() {
 		}
 	}
 	nearest = nearest.round(3);
-	nearestContent = '<p>The nearest station is ' + nStop + ', which is ' + nearest + ' miles away.</p>';
-	google.maps.event.addListener(marker, 'click', function() {
+	nearestContent = '<p>The nearest station is <span class="bold">' + nStop + '</span>, which is ' + nearest + ' miles away.</p>';
+	//google.maps.event.addListener(marker, 'click', function() {
 		infoWindow.setContent(initInfoContent + nearestContent);
 		infoWindow.open(map, marker);
-	});
+	//});
 
 	dLine = [myLoc, linePath[nIndex]];
 	distLine = new google.maps.Polyline ({
 		path: dLine,
 		geodesic: true,
 		strokeColor: '#404040',
-		strokeOpacity: 1.0,
-		strokeWeight: 8,
+		strokeOpacity: 0.6,
+		strokeWeight: 6,
 		map: map
 	});
 }
