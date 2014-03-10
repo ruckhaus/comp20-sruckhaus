@@ -31,13 +31,11 @@ function renderMap() {
 		title: "Current Location"
 	});
 	marker.setMap(map)
-	initInfoContent = '<h3>Current Location:</h3>' + '<p>' + lat + ', ' + lng + '</p>';
+	initInfoContent = '<h3>You are here:</h3>' + '<p>' + lat.round(5) + ', ' + lng.round(5) + '</p>';
 	//FIGURE OUT HOW TO GET ADDRESS FROM LATLNG
 	infoWindow = new google.maps.InfoWindow();
-	//google.maps.event.addListener(marker, 'click', function() {
-		infoWindow.setContent(initInfoContent);
-		infoWindow.open(map, marker);
-	//});
+	infoWindow.setContent(initInfoContent);
+	infoWindow.open(map, marker);
 
 	xhr = new XMLHttpRequest();
 	xhr.open("get","http://mbtamap.herokuapp.com/mapper/rodeo.json",true);
@@ -77,7 +75,7 @@ function drawLine() {
 			default:
 				alert("Houston, we have a problem.");
 	}
-	document.title = 'Nearest ' + lineName + ' station';
+	document.title = 'Nearest ' + lineName + ' Line station';
 	stationMark = {
 		url: sign,
 		origin: new google.maps.Point(0,0),
