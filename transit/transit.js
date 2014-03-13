@@ -98,7 +98,12 @@ function drawLine() {
 			stopWindow = new google.maps.InfoWindow();
 			google.maps.event.addListener(stopMarker, 'click', function() {
 				schedule = getSchedule(this.title);
-				stopWindow.setContent('<h3>' + this.title + '</h3>');
+				stopContent = '<h3>' + this.title + '</h3><table><thead><tr><td>Destination</td><td>Arriving in (s)</td></tr></thead>';
+				for (var k=0; k<schedule.length; k++) {
+					stopContent += '<tr><td>' + schedule[k].dest + '</td><td>' + schedule[k].time + '</td></tr>';
+				}
+				stopContent += '</table>';
+				stopWindow.setContent(stopContent);
 				stopWindow.open(map, this);
 			});
 			j++;
@@ -155,7 +160,7 @@ function getSchedule(stationStop) {
 		for (var j=0; j<scheduleData.schedule[i].Predictions.length; j++) {
 			if(scheduleData.schedule[i].Predictions[j].Stop == stationStop) {
 				tableData[k] = {
-					"dest": scheduleData.schedule[i].Predictions[j].Destination,
+					"dest": scheduleData.schedule[i].Destination,
 					"time": scheduleData.schedule[i].Predictions[j].Seconds
 				}
 				k++;
