@@ -31,6 +31,8 @@ function renderMap() {
 		title: "Current Location"
 	});
 	marker.setMap(map)
+	myAddress = getAddress();
+	console.log(myAddress);
 	initInfoContent = '<h3>You are here:</h3>' + '<p>' + lat.round(5) + ', ' + lng.round(5) + '</p>';
 	//FIGURE OUT HOW TO GET ADDRESS FROM LATLNG
 	infoWindow = new google.maps.InfoWindow();
@@ -45,6 +47,16 @@ function renderMap() {
 	xhr.open("get","http://mbtamap.herokuapp.com/mapper/rodeo.json",true);
 	xhr.onreadystatechange = dataReady;
 	xhr.send(null);
+}
+function getAddress() {
+	geocoder = new google.maps.Geocoder();
+	geocoder.geocode({'latLng': latlng}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+			if (results[1]) {
+		     return results[1].formatted_address;
+			}
+		}
+	});
 }
 
 function dataReady() {
