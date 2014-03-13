@@ -106,7 +106,7 @@ function drawLine() {
 				schedule.sort(compare);
 				stopContent = '<h3>' + this.title + '</h3><table><thead><tr><td>Destination</td><td>Arriving in (min)</td></tr></thead>';
 				for (var k=0; k<schedule.length; k++) {
-					stopContent += '<tr><td>' + schedule[k].dest + '</td><td>' + schedule[k].time.round(2) + '</td></tr>';
+					stopContent += '<tr><td>' + schedule[k].dest + '</td><td>' + Math.floor(schedule[k]['min']) + ':' + schedule[k].sec + '</td></tr>';
 				}
 				stopContent += '</table>';
 				stopWindow.setContent(stopContent);
@@ -167,7 +167,8 @@ function getSchedule(stationStop) {
 			if(scheduleData.schedule[i].Predictions[j].Stop == stationStop) {
 				tableData[k] = {
 					"dest": scheduleData.schedule[i].Destination,
-					"time": scheduleData.schedule[i].Predictions[j].Seconds/60
+					"min": scheduleData.schedule[i].Predictions[j].Seconds/60,
+					"sec": scheduleData.schedule[i].Predictions[j].Sections % 60
 				}
 				k++;
 			}
@@ -230,10 +231,10 @@ Number.prototype.round = function(places) {
 }
 
 function compare(a,b) {
-	if (a.time < b.time) {
+	if (a['min'] < b['min']) {
 		return -1;
 	}
-	if (a.time > b.time) {
+	if (a['min'] > b['min']) {
 		return 1;
 	}
 	return 0;
