@@ -161,7 +161,7 @@ function getSchedule(stationStop) {
 			if(scheduleData.schedule[i].Predictions[j].Stop == stationStop) {
 				tableData[k] = {
 					"dest": scheduleData.schedule[i].Destination,
-					"time": scheduleData.schedule[i].Predictions[j].Seconds/60;
+					"time": scheduleData.schedule[i].Predictions[j].Seconds/60
 				}
 				k++;
 			}
