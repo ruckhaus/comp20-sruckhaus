@@ -98,9 +98,9 @@ function drawLine() {
 			stopWindow = new google.maps.InfoWindow();
 			google.maps.event.addListener(stopMarker, 'click', function() {
 				schedule = getSchedule(this.title);
-				stopContent = '<h3>' + this.title + '</h3><table><thead><tr><td>Destination</td><td>Arriving in (s)</td></tr></thead>';
+				stopContent = '<h3>' + this.title + '</h3><table><thead><tr><td>Destination</td><td>Arriving in (min)</td></tr></thead>';
 				for (var k=0; k<schedule.length; k++) {
-					stopContent += '<tr><td>' + schedule[k].dest + '</td><td>' + schedule[k].time + '</td></tr>';
+					stopContent += '<tr><td>' + schedule[k].dest + '</td><td>' + schedule[k].time.round(0) + '</td></tr>';
 				}
 				stopContent += '</table>';
 				stopWindow.setContent(stopContent);
@@ -161,7 +161,7 @@ function getSchedule(stationStop) {
 			if(scheduleData.schedule[i].Predictions[j].Stop == stationStop) {
 				tableData[k] = {
 					"dest": scheduleData.schedule[i].Destination,
-					"time": scheduleData.schedule[i].Predictions[j].Seconds
+					"time": scheduleData.schedule[i].Predictions[j].Seconds/60;
 				}
 				k++;
 			}
