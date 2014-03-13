@@ -36,6 +36,10 @@ function renderMap() {
 	infoWindow = new google.maps.InfoWindow();
 	infoWindow.setContent(initInfoContent);
 	infoWindow.open(map, marker);
+	google.maps.event.addListener(marker, 'click', function() {
+		stopWindow.close();
+		infoWindow.open(map,marker);
+	});
 
 	xhr = new XMLHttpRequest();
 	xhr.open("get","http://mbtamap.herokuapp.com/mapper/rodeo.json",true);
@@ -98,6 +102,7 @@ function drawLine() {
 			stopWindow = new google.maps.InfoWindow();
 			google.maps.event.addListener(stopMarker, 'click', function() {
 				stopWindow.close();
+				infoWindow.close();
 				schedule = getSchedule(this.title);
 				stopContent = '<h3>' + this.title + '</h3><table><thead><tr><td>Destination</td><td>Arriving in (min)</td></tr></thead>';
 				for (var k=0; k<schedule.length; k++) {
