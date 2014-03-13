@@ -3,7 +3,7 @@ str = '[{"line":"Blue","station":"Wonderland","lat":42.41342,"lng":-70.991648},{
 function initialize() {
 	mapOptions = {
 		center: new google.maps.LatLng(42.3581, -71.0636), //center in Boston
-		zoom: 15
+		zoom: 13
    };
 	map = new google.maps.Map(document.getElementById("mapcanvas"),mapOptions);
 	getLocation();
@@ -31,12 +31,42 @@ function renderMap() {
 		title: "Current Location"
 	});
 	marker.setMap(map)
-	initInfoContent = '<h3>Current Location:</h3>' + '<p>' + lat + ', ' + lng + '</p>';
-	//FIGURE OUT HOW TO GET ADDRESS FROM LATLNG
+	getAddress();
+}
+
+function getAddress() {
+	geocoder = new google.maps.Geocoder();
+	geocoder.geocode({'latLng': myLoc}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+			if (results[0]) {
+				placeMe(results[0].formatted_address);
+			}
+			else {
+				placeMe(0);
+			}
+		}
+		else {
+			placeMe(0);
+		}
+	});
+}
+
+function placeMe(myAddress) {
+	initInfoContent = '<h3>You are here:</h3>';
+	if (myAddress != 0) {
+		initInfoContent += '<p>Near ' + myAddress + '</p>';
+	}
+	else {
+		initInfoContent += '<p>' + lat.round(5) + ', ' + lng.round(5) + '</p>';
+	}
 	infoWindow = new google.maps.InfoWindow();
+	infoWindow.setContent(initInfoContent);
+	infoWindow.open(map, marker);
 	google.maps.event.addListener(marker, 'click', function() {
-		infoWindow.setContent(initInfoContent);
-		infoWindow.open(map, marker);
+		infoWindow.open(map,marker);
+		if(stopWindow){
+			stopWindow.close()
+		}
 	});
 
 	xhr = new XMLHttpRequest();
@@ -44,16 +74,17 @@ function renderMap() {
 	xhr.onreadystatechange = dataReady;
 	xhr.send(null);
 }
-
+	
 function dataReady() {
 	if(xhr.readyState==4 && xhr.status==200) {
 		scheduleData = JSON.parse(xhr.responseText);
-		console.log('Line given: ' + scheduleData["line"]);//DELETE ME
 		stations = JSON.parse(str);
 		drawLine();
 	}
 	else if (xhr.readyState==4 && xhr.status==500) {
-		alert("Unable to load train data.\nThis is entirely Ming's fault. Sorry.");
+		xhr.open("get","http://mbtamap.herokuapp.com/mapper/rodeo.json",true);
+		xhr.onreadystatechange = dataReady;
+		xhr.send(null);
 	}
 }
 
@@ -77,6 +108,7 @@ function drawLine() {
 			default:
 				alert("Houston, we have a problem.");
 	}
+	document.title = 'Nearest ' + lineName + ' Line station';
 	stationMark = {
 		url: sign,
 		origin: new google.maps.Point(0,0),
@@ -97,9 +129,17 @@ function drawLine() {
 			linePath[j] = tStop;
 			stopName[j] = stopMarker.title;
 			stopWindow = new google.maps.InfoWindow();
-			//stopContent = '<h3>' + stopMarker.title + ' Station</h3>'
 			google.maps.event.addListener(stopMarker, 'click', function() {
-				stopWindow.setContent('<h3>' + this.title + ' Station</h3>');
+				stopWindow.close();
+				infoWindow.close();
+				schedule = getSchedule(this.title);
+				schedule.sort(compare);
+				stopContent = '<h3>' + this.title + '</h3><table><thead><tr><td>Destination</td><td>Arriving in...</td></tr></thead>';
+				for (var k=0; k<schedule.length; k++) {
+					stopContent += '<tr><td>' + schedule[k].dest + '</td><td>' + Math.floor(schedule[k]['min']) + ':' + schedule[k].sec + '</td></tr>';
+				}
+				stopContent += '</table>';
+				stopWindow.setContent(stopContent);
 				stopWindow.open(map, this);
 			});
 			j++;
@@ -149,12 +189,33 @@ function drawLine() {
 	findNearest();
 }
 
+function getSchedule(stationStop) {
+	var tableData = [];
+	k=0; //length of tableData array
+	for (var i=0; i<scheduleData.schedule.length; i++) {
+		for (var j=0; j<scheduleData.schedule[i].Predictions.length; j++) {
+			if(scheduleData.schedule[i].Predictions[j].Stop == stationStop) {
+				tableData[k] = {
+					"dest": scheduleData.schedule[i].Destination,
+					"min": scheduleData.schedule[i].Predictions[j].Seconds/60,
+					"sec": scheduleData.schedule[i].Predictions[j].Seconds % 60
+				}
+				if(tableData[k].sec < 10) {
+					tableData[k].sec = '0' + tableData[k].sec;
+				}
+				k++;
+			}
+		}
+	}
+	return tableData;
+}
+
 function findNearest() {
 	nearest = 25000; // Earth's circumference is 24,901 miles
 	nStop = 'a';     // nearest stop
 	nIndex = 50;     // no line has 50 stops (arbitrary)
 	for (var i = 0; i<linePath.length; i++) {
-		dist = haversine(myLoc.d,myLoc.e,linePath[i].d,linePath[i].e);
+		dist = haversine(myLoc.k,myLoc.A,linePath[i].k,linePath[i].A);
 		if (dist < nearest) {
 			nearest = dist;
 			nStop = stopName[i];
@@ -162,25 +223,23 @@ function findNearest() {
 		}
 	}
 	nearest = nearest.round(3);
-	nearestContent = '<p>The nearest station is ' + nStop + ', which is ' + nearest + ' miles away.</p>';
-	google.maps.event.addListener(marker, 'click', function() {
-		infoWindow.setContent(initInfoContent + nearestContent);
-		infoWindow.open(map, marker);
-	});
+	nearestContent = '<p>The nearest station is <strong>' + nStop + '</strong>, which is ' + nearest + ' miles away.</p>';
+	infoWindow.setContent(initInfoContent + nearestContent);
+	infoWindow.open(map, marker);
 
 	dLine = [myLoc, linePath[nIndex]];
 	distLine = new google.maps.Polyline ({
 		path: dLine,
 		geodesic: true,
 		strokeColor: '#404040',
-		strokeOpacity: 1.0,
-		strokeWeight: 8,
+		strokeOpacity: 0.6,
+		strokeWeight: 6,
 		map: map
 	});
 }
 
 function haversine(lat1, lon1, lat2, lon2) {
-	//Haversine formula from movable-type.co.uk
+	// Haversine formula from movable-type.co.uk
 	var R = 3963.1676; // miles
 	var dLat = (lat2-lat1);
 	dLat = toRad(dLat)
@@ -202,4 +261,14 @@ function toRad(num) {
 
 Number.prototype.round = function(places) {
 	return +(Math.round(this + "e+" + places)  + "e-" + places);
+}
+
+function compare(a,b) {
+	if (a['min'] < b['min']) {
+		return -1;
+	}
+	if (a['min'] > b['min']) {
+		return 1;
+	}
+	return 0;
 }

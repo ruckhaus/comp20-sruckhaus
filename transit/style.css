@@ -14,3 +14,18 @@ body {
 	height: 100%;
 	width: 100%;
 }
+
+table {
+	border-collapse: collapse;
+	text-align: center;
+}
+
+td {
+	border: 1px solid black;
+	margin: 0px;
+	padding: 1px;
+}
+
+thead {
+	font-weight: bold;
+}
