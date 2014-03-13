@@ -48,9 +48,10 @@ function renderMap() {
 	xhr.onreadystatechange = dataReady;
 	xhr.send(null);
 }
+
 function getAddress() {
 	geocoder = new google.maps.Geocoder();
-	geocoder.geocode({'latLng': latlng}, function(results, status) {
+	geocoder.geocode({'latLng': myLoc}, function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
 			if (results[1]) {
 		     return results[1].formatted_address;
