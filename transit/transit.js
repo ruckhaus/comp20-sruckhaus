@@ -31,22 +31,7 @@ function renderMap() {
 		title: "Current Location"
 	});
 	marker.setMap(map)
-	myAddress = getAddress();
-	console.log(myAddress);
-	initInfoContent = '<h3>You are here:</h3>' + '<p>' + lat.round(5) + ', ' + lng.round(5) + '</p>';
-	//FIGURE OUT HOW TO GET ADDRESS FROM LATLNG
-	infoWindow = new google.maps.InfoWindow();
-	infoWindow.setContent(initInfoContent);
-	infoWindow.open(map, marker);
-	google.maps.event.addListener(marker, 'click', function() {
-		infoWindow.open(map,marker);
-		stopWindow.close();
-	});
-
-	xhr = new XMLHttpRequest();
-	xhr.open("get","http://mbtamap.herokuapp.com/mapper/rodeo.json",true);
-	xhr.onreadystatechange = dataReady;
-	xhr.send(null);
+	getAddress();
 }
 
 function getAddress() {
@@ -55,18 +40,36 @@ function getAddress() {
 		if (status == google.maps.GeocoderStatus.OK) {
 			console.log(results[0].formatted_address);
 			if (results[0]) {
-				callback(results[0].formatted_address);
+				placeMe(results[0].formatted_address);
 			}
-			else {
-				callback(0);
-			}
-		}
-		else {
-			callback(0);
 		}
 	});
 }
 
+function placeMe(myAddress) {
+	console.log(myAddress);
+	initInfoContent = '<h3>You are here:</h3>' + '<p>' + lat.round(5) + ', ' + lng.round(5);
+	if (myAddress) {
+		initInfoContent += '<br />' + myAddress;
+	}	
+	initInfoContent += '</p>'
+	infoWindow = new google.maps.InfoWindow();
+	infoWindow.setContent(initInfoContent);
+	infoWindow.open(map, marker);
+	google.maps.event.addListener(marker, 'click', function() {
+		infoWindow.open(map,marker);
+		if(stopWindow){
+			stopWindow.close()
+		}
+	});
+
+	xhr = new XMLHttpRequest();
+	//make this stuff a new function?
+	xhr.open("get","http://mbtamap.herokuapp.com/mapper/rodeo.json",true);
+	xhr.onreadystatechange = dataReady;
+	xhr.send(null);
+}
+	
 function dataReady() {
 	if(xhr.readyState==4 && xhr.status==200) {
 		scheduleData = JSON.parse(xhr.responseText);
