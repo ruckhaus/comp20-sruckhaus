@@ -50,7 +50,6 @@ function renderMap() {
 function dataReady() {
 	if(xhr.readyState==4 && xhr.status==200) {
 		scheduleData = JSON.parse(xhr.responseText);
-		console.log('Line given: ' + scheduleData["line"]);//DELETE ME
 		stations = JSON.parse(str);
 		drawLine();
 	}
@@ -107,7 +106,7 @@ function drawLine() {
 				schedule.sort(compare);
 				stopContent = '<h3>' + this.title + '</h3><table><thead><tr><td>Destination</td><td>Arriving in (min)</td></tr></thead>';
 				for (var k=0; k<schedule.length; k++) {
-					stopContent += '<tr><td>' + schedule[k].dest + '</td><td>' + schedule[k].time.round(0) + '</td></tr>';
+					stopContent += '<tr><td>' + schedule[k].dest + '</td><td>' + schedule[k].time.round(2) + '</td></tr>';
 				}
 				stopContent += '</table>';
 				stopWindow.setContent(stopContent);
@@ -161,7 +160,6 @@ function drawLine() {
 }
 
 function getSchedule(stationStop) {
-	console.log(stationStop);
 	var tableData = [];
 	k=0; //length of tableData array
 	for (var i=0; i<scheduleData.schedule.length; i++) {
