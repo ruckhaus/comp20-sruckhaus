@@ -39,8 +39,8 @@ function renderMap() {
 	infoWindow.setContent(initInfoContent);
 	infoWindow.open(map, marker);
 	google.maps.event.addListener(marker, 'click', function() {
-		stopWindow.close();
 		infoWindow.open(map,marker);
+		stopWindow.close();
 	});
 
 	xhr = new XMLHttpRequest();
@@ -55,8 +55,8 @@ function getAddress() {
 		if (status == google.maps.GeocoderStatus.OK) {
 			console.log(results[0].formatted_address);
 			if (results[0]) {
-				console.log('yes');
-				return results[0].formatted_address;
+				geoAddress = results[0].formatted_address;
+				return geoAddress;
 			}
 			else {
 				return 0;
