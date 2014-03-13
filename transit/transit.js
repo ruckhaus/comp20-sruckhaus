@@ -55,15 +55,14 @@ function getAddress() {
 		if (status == google.maps.GeocoderStatus.OK) {
 			console.log(results[0].formatted_address);
 			if (results[0]) {
-				geoAddress = results[0].formatted_address;
-				return geoAddress;
+				callback(results[0].formatted_address);
 			}
 			else {
-				return 0;
+				callback(0);
 			}
 		}
 		else {
-			return 0;
+			callback(0);
 		}
 	});
 }
