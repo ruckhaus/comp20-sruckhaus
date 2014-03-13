@@ -38,19 +38,23 @@ function getAddress() {
 	geocoder = new google.maps.Geocoder();
 	geocoder.geocode({'latLng': myLoc}, function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
-			console.log(results[0].formatted_address);
 			if (results[0]) {
 				placeMe(results[0].formatted_address);
 			}
+			else {
+				placeMe(0);
+			}
+		}
+		else {
+			placeMe(0);
 		}
 	});
 }
 
 function placeMe(myAddress) {
-	console.log(myAddress);
 	initInfoContent = '<h3>You are here:</h3>' + '<p>' + lat.round(5) + ', ' + lng.round(5);
-	if (myAddress) {
-		initInfoContent += '<br />' + myAddress;
+	if (myAddress != 0) {
+		initInfoContent += '<br />Near ' + myAddress;
 	}	
 	initInfoContent += '</p>'
 	infoWindow = new google.maps.InfoWindow();
@@ -77,7 +81,10 @@ function dataReady() {
 		drawLine();
 	}
 	else if (xhr.readyState==4 && xhr.status==500) {
-		alert("Unable to load train data.\nRefresh and try again.");
+		xhr.open("get","http://mbtamap.herokuapp.com/mapper/rodeo.json",true);
+		xhr.onreadystatechange = dataReady;
+		xhr.send(null);
+//		alert("Unable to load train data.\nRefresh and try again.");
 	}
 }
 
