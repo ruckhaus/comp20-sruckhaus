@@ -97,6 +97,7 @@ function drawLine() {
 			stopName[j] = stopMarker.title;
 			stopWindow = new google.maps.InfoWindow();
 			google.maps.event.addListener(stopMarker, 'click', function() {
+				stopWindow.close();
 				schedule = getSchedule(this.title);
 				stopContent = '<h3>' + this.title + '</h3><table><thead><tr><td>Destination</td><td>Arriving in (min)</td></tr></thead>';
 				for (var k=0; k<schedule.length; k++) {
@@ -154,6 +155,7 @@ function drawLine() {
 }
 
 function getSchedule(stationStop) {
+	console.log(stationStop);
 	var tableData = [];
 	k=0; //length of tableData array
 	for (var i=0; i<scheduleData.schedule.length; i++) {
