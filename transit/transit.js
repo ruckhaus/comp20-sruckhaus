@@ -3,7 +3,7 @@ str = '[{"line":"Blue","station":"Wonderland","lat":42.41342,"lng":-70.991648},{
 function initialize() {
 	mapOptions = {
 		center: new google.maps.LatLng(42.3581, -71.0636), //center in Boston
-		zoom: 15
+		zoom: 13
    };
 	map = new google.maps.Map(document.getElementById("mapcanvas"),mapOptions);
 	getLocation();

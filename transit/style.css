@@ -8,7 +8,6 @@ body {
 	width: 100%;
 	margin: 0px;
 	padding: 0px;
-	font-family: Calibri, Helvetica, Arial, sans-serif;
 }
 
 #mapcanvas {
@@ -18,6 +17,7 @@ body {
 
 table {
 	border-collapse: collapse;
+	text-align: center;
 }
 
 td {
