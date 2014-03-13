@@ -2,24 +2,17 @@ Sarah Ruckhaus
 COMP 20 Assignment 3
 14 March 2014
 
--3/5: I've spent about 2 or 3 hours on this, at least an hour and a half
- on getting the Google Maps API to work.
--3/7: Spent about an hour adding station data, setting up the info window,
- and using the xhr request. So far, it works.
--3/8: I spent roughly 2 hours on adding station markers and playing connect the dots.
--3/9: 2 hours on info windows and Haversine formula
--3/10: 0.5 hours on mostly aesthetics
--3/13: 4 hours mostly on reverse geocoding
+Most of my time was spent on setting up the polylines and station markers, adding the schedule to the info windows, reverse geocoding, and initially setting up the Google Maps API.
 
 Sometime between Monday and Thursday, the keys for Lat and Lng in Google Maps
 objects must have changed (used to be 'd' and 'e', are now 'k' and 'A' as of 3/13).
 If finding the nearest station does not work when you grade it, that's probably why.
---Error would be where haversine() is called in findNearest()
+--Error would be where haversine() is called in findNearest() (line 216)
 
 Did not work in Firefox (used Chrome)
 
 People collaborated with: 0
-Total hours spent: 10
+Total hours spent: ~10
 Times my repo was corrupt and needed to be recloned: 2
 Seeing an awesome final product: priceless.
 
