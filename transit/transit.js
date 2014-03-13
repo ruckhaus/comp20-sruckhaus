@@ -170,6 +170,9 @@ function getSchedule(stationStop) {
 					"min": scheduleData.schedule[i].Predictions[j].Seconds/60,
 					"sec": scheduleData.schedule[i].Predictions[j].Seconds % 60
 				}
+				if(tableData[k].sec < 10) {
+					tableData[k].sec = '0' + tableData[k].sec;
+				}
 				k++;
 			}
 		}
