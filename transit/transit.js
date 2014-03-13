@@ -53,9 +53,9 @@ function getAddress() {
 	geocoder = new google.maps.Geocoder();
 	geocoder.geocode({'latLng': myLoc}, function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
-			console.log(results);
-			if (results[1]) {
-		     return results[1].formatted_address;
+			console.log(results[0].formatted_address);
+			if (results[0]) {
+		     return results[0].formatted_address;
 			}
 		}
 	});
