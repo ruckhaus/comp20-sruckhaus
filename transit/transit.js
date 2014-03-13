@@ -104,6 +104,7 @@ function drawLine() {
 				stopWindow.close();
 				infoWindow.close();
 				schedule = getSchedule(this.title);
+				schedule.sort(compare);
 				stopContent = '<h3>' + this.title + '</h3><table><thead><tr><td>Destination</td><td>Arriving in (min)</td></tr></thead>';
 				for (var k=0; k<schedule.length; k++) {
 					stopContent += '<tr><td>' + schedule[k].dest + '</td><td>' + schedule[k].time.round(0) + '</td></tr>';
@@ -228,4 +229,14 @@ function toRad(num) {
 
 Number.prototype.round = function(places) {
 	return +(Math.round(this + "e+" + places)  + "e-" + places);
+}
+
+function compare(a,b) {
+	if (a.time < b.time) {
+		return -1;
+	}
+	if (a.time > b.time) {
+		return 1;
+	}
+	return 0;
 }
