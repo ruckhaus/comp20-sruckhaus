@@ -51,7 +51,7 @@ function dataReady() {
 		drawLine();
 	}
 	else if (xhr.readyState==4 && xhr.status==500) {
-		alert("Unable to load train data.\nThis is entirely Ming's fault. Sorry.\nRefresh and try again.");
+		alert("Unable to load train data.\nRefresh and try again.");
 	}
 }
 
@@ -175,7 +175,9 @@ function findNearest() {
 	nStop = 'a';     // nearest stop
 	nIndex = 50;     // no line has 50 stops (arbitrary)
 	for (var i = 0; i<linePath.length; i++) {
+		console.log("In the for loop");
 		dist = haversine(myLoc.d,myLoc.e,linePath[i].d,linePath[i].e);
+		console.log("I can haz haversine " + dist);
 		if (dist < nearest) {
 			nearest = dist;
 			nStop = stopName[i];
