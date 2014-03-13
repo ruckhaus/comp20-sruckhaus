@@ -97,6 +97,7 @@ function drawLine() {
 			stopName[j] = stopMarker.title;
 			stopWindow = new google.maps.InfoWindow();
 			google.maps.event.addListener(stopMarker, 'click', function() {
+				schedule = getSchedule(this.title);
 				stopWindow.setContent('<h3>' + this.title + '</h3>');
 				stopWindow.open(map, this);
 			});
@@ -147,6 +148,22 @@ function drawLine() {
 	findNearest();
 }
 
+function getSchedule(stationStop) {
+	var tableData = [];
+	k=0; //length of tableData array
+	for (var i=0; i<scheduleData.schedule.length; i++) {
+		for var j=0; j<scheduleData.schedule[i].Predictions.length; j++) {
+			if(scheduleData.schedule[i].Predictions[j].Stop == stationStop) {
+				tableData[k] = {
+					"dest": scheduleData.schedule[i].Predictions[j].Destination,
+					"time": scheduleData.schedule[i].Predictions[j].Seconds
+				}
+			}
+		}
+	}
+	return tableData;
+}
+
 function findNearest() {
 	nearest = 25000; // Earth's circumference is 24,901 miles
 	nStop = 'a';     // nearest stop
@@ -160,7 +177,7 @@ function findNearest() {
 		}
 	}
 	nearest = nearest.round(3);
-	nearestContent = '<p>The nearest station is <span class="bold">' + nStop + '</span>, which is ' + nearest + ' miles away.</p>';
+	nearestContent = '<p>The nearest station is <strong>' + nStop + '</strong>, which is ' + nearest + ' miles away.</p>';
 	infoWindow.setContent(initInfoContent + nearestContent);
 	infoWindow.open(map, marker);
 
