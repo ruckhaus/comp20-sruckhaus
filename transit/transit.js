@@ -168,7 +168,7 @@ function getSchedule(stationStop) {
 				tableData[k] = {
 					"dest": scheduleData.schedule[i].Destination,
 					"min": scheduleData.schedule[i].Predictions[j].Seconds/60,
-					"sec": scheduleData.schedule[i].Predictions[j].Sections % 60
+					"sec": scheduleData.schedule[i].Predictions[j].Seconds % 60
 				}
 				k++;
 			}
