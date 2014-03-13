@@ -175,9 +175,7 @@ function findNearest() {
 	nStop = 'a';     // nearest stop
 	nIndex = 50;     // no line has 50 stops (arbitrary)
 	for (var i = 0; i<linePath.length; i++) {
-		console.log("In the for loop");
-		dist = haversine(myLoc.d,myLoc.e,linePath[i].d,linePath[i].e);
-		console.log("I can haz haversine " + dist);
+		dist = haversine(myLoc.k,myLoc.A,linePath[i].k,linePath[i].A);
 		if (dist < nearest) {
 			nearest = dist;
 			nStop = stopName[i];
