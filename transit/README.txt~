@@ -9,7 +9,7 @@ COMP 20 Assignment 3
 -3/8: I spent roughly 2 hours on adding station markers and playing connect the dots.
 -3/9: 2 hours on info windows and Haversine formula
 -3/10: 0.5 hours on mostly aesthetics
--3/13: 4 hours mostly on reverse geocoding
+-3/13: 2.5 hours
 
 Sometime between Monday and Thursday, the keys for Lat and Lng in Google Maps
 objects must have changed (used to be 'd' and 'e', are now 'k' and 'A' as of 3/13).
@@ -19,7 +19,7 @@ If finding the nearest station does not work when you grade it, that's probably 
 Did not work in Firefox (used Chrome)
 
 People collaborated with: 0
-Total hours spent: 10
+Total hours spent:
 Times my repo was corrupt and needed to be recloned: 2
 Seeing an awesome final product: priceless.
 
@@ -34,6 +34,4 @@ Sources:
   for rounding prototype
 --http://stackoverflow.com/questions/1129216/sorting-objects-in-an-array-by-a-field-value-in-javascript
   for sorting schedule by time
---http://stackoverflow.com/questions/2993563/how-do-i-return-a-variable-from-google-maps-javascript-geocoder-callback
-  for help with reverse geocoding
 ============================================================================
