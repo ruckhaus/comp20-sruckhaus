@@ -152,12 +152,13 @@ function getSchedule(stationStop) {
 	var tableData = [];
 	k=0; //length of tableData array
 	for (var i=0; i<scheduleData.schedule.length; i++) {
-		for var j=0; j<scheduleData.schedule[i].Predictions.length; j++) {
+		for (var j=0; j<scheduleData.schedule[i].Predictions.length; j++) {
 			if(scheduleData.schedule[i].Predictions[j].Stop == stationStop) {
 				tableData[k] = {
 					"dest": scheduleData.schedule[i].Predictions[j].Destination,
 					"time": scheduleData.schedule[i].Predictions[j].Seconds
 				}
+				k++;
 			}
 		}
 	}
