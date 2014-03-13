@@ -53,12 +53,11 @@ function getAddress() {
 	geocoder = new google.maps.Geocoder();
 	geocoder.geocode({'latLng': myLoc}, function(results, status) {
 		if (status == google.maps.GeocoderStatus.OK) {
-			console.log('geocode ok');
+			console.log(results);
 			if (results[1]) {
 		     return results[1].formatted_address;
 			}
 		}
-		console.log('nope. not at all ok');
 	});
 }
 
