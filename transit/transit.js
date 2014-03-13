@@ -55,7 +55,8 @@ function getAddress() {
 		if (status == google.maps.GeocoderStatus.OK) {
 			console.log(results[0].formatted_address);
 			if (results[0]) {
-		     return results[0].formatted_address;
+				console.log('yes');
+				return results[0].formatted_address;
 			}
 		}
 	});
