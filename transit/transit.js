@@ -58,6 +58,12 @@ function getAddress() {
 				console.log('yes');
 				return results[0].formatted_address;
 			}
+			else {
+				return 0;
+			}
+		}
+		else {
+			return 0;
 		}
 	});
 }
