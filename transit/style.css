@@ -16,10 +16,13 @@ body {
 	width: 100%;
 }
 
+table {
+	border-collapse: collapse;
+}
+
 td {
 	border: 1px solid black;
 	margin: 0px;
-	border-collapse: collapse;
 }
 
 thead {
