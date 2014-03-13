@@ -52,11 +52,13 @@ function getAddress() {
 }
 
 function placeMe(myAddress) {
-	initInfoContent = '<h3>You are here:</h3>' + '<p>' + lat.round(5) + ', ' + lng.round(5);
+	initInfoContent = '<h3>You are here:</h3>';
 	if (myAddress != 0) {
-		initInfoContent += '<br />Near ' + myAddress;
-	}	
-	initInfoContent += '</p>'
+		initInfoContent += '<p>Near ' + myAddress + '</p>';
+	}
+	else {
+		initInfoContent += '<p>' + lat.round(5) + ', ' + lng.round(5) + '</p>';
+	}
 	infoWindow = new google.maps.InfoWindow();
 	infoWindow.setContent(initInfoContent);
 	infoWindow.open(map, marker);
