@@ -104,7 +104,7 @@ function drawLine() {
 				infoWindow.close();
 				schedule = getSchedule(this.title);
 				schedule.sort(compare);
-				stopContent = '<h3>' + this.title + '</h3><table><thead><tr><td>Destination</td><td>Arriving in (min)</td></tr></thead>';
+				stopContent = '<h3>' + this.title + '</h3><table><thead><tr><td>Destination</td><td>Arriving in...</td></tr></thead>';
 				for (var k=0; k<schedule.length; k++) {
 					stopContent += '<tr><td>' + schedule[k].dest + '</td><td>' + Math.floor(schedule[k]['min']) + ':' + schedule[k].sec + '</td></tr>';
 				}
