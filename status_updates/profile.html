@@ -5,24 +5,28 @@
 <head>
   <title>Fecesbook</title>
   <script>
-    function update() {
-    var statusDate = new Date();
-    var statusMonth = statusDate.getMonth() + 1;
-    var statusDay = statusDate.getDate();
-    var statusYear = statusDate.getFullYear();
-    var statusHour = statusDate.getHours();
-    var statusMinute = statusDate.getMinutes();
-    if (statusMinute < 10) {
-	statusMinute = "0" + statusMinute;
-    }
-    var statusTime = statusMonth + "/" + statusDay + "/" + statusYear + " " + statusHour + ":" + statusMinute;
+		function update() {
+	   	var statusDate = new Date();
+   		var statusMonth = statusDate.getMonth() + 1;
+   		var statusDay = statusDate.getDate();
+			var statusYear = statusDate.getFullYear();
+			var statusHour = statusDate.getHours();
+			var statusMinute = statusDate.getMinutes();
+ 			if (statusMinute < 10) {
+				statusMinute = "0" + statusMinute;
+    		}
+    		var statusTime = statusMonth + "/" + statusDay + "/" + statusYear + " " + statusHour + ":" + statusMinute;
 
-    var status = document.getElementById("msg").value;
-    var newStatus = statusTime + " - " + status;
-    
-    document.getElementById("status").innerHTML= "<p>"+ newStatus + "</p>" + document.getElementById("status").innerHTML;
-    document.getElementById("msg").value="";
-    }
+		   var status = document.getElementById("msg").value;
+    		var newStatus = statusTime + " - " + status;
+			localStorage[statusDate.getTime()] = "<p>" + newStatus + "</p>";
+			document.getElementById("status").innerHTML = "";
+			
+			for (key in localStorage) {
+				document.getElementById("status").innerHTML = localStorage[key] + document.getElementById("status").innerHTML;
+			}
+    		document.getElementById("msg").value="";
+		}
   </script>
 </head>
 
