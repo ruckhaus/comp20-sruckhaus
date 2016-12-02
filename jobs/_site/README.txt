@@ -8,6 +8,3 @@ Everything should be implemented correctly.
 I didn't collaborate with anyone.
 
 I spent 30-45 minutes on the JSON parsing and output. I spend another 1.5 hours or so on CSS.
-___
-25 November 2016
-Added title, attempted hover of extra stuff (did not complete)
