@@ -72,7 +72,7 @@ function placeMe(myAddress) {
 	// Parse stations data and generate random mbta line
 	stations = JSON.parse(str);
 	mbtaLines = ['red','orange','blue'];
-	lineNumber = Math.floor(Math.random() * 2); // Generate random Number
+	lineNumber = Math.floor(Math.random() * 3); // Generate random Number
 	drawLine(mbtaLines[lineNumber]);
 
 	//Make XML request for rodeo.json
