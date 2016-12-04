@@ -139,9 +139,11 @@ function drawLine(randomLine) {
 			google.maps.event.addListener(stopMarker, 'click', function() {
 				stopWindow.close();
 				infoWindow.close();
+				stopDist = haversine(myLoc.lat(),myLoc.lng(),this.position.lat(),this.position.lng());
+				stopDist = stopDist.round(2); // round distance to 2 decimal places
 				/*schedule = getSchedule(this.title);
 				schedule.sort(compare);*/
-				stopContent = '<h3>' + this.title + '</h3>'; //'<table><thead><tr><td>Destination</td><td>Arriving in...</td></tr></thead>';
+				stopContent = '<h3>' + this.title + ' ' + '</h3><p>' + stopDist + ' miles away.</p>'; //'<table><thead><tr><td>Destination</td><td>Arriving in...</td></tr></thead>';
 				/*for (var k=0; k<schedule.length; k++) {
 					stopContent += '<tr><td>' + schedule[k].dest + '</td><td>' + Math.floor(schedule[k]['min']) + ':' + schedule[k].sec + '</td></tr>';
 				}
