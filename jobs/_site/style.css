@@ -6,12 +6,6 @@ body {
 	font-family: "Courier New", monospace;
 }
 
-h1 {
-	text-align: center;
-	color: #FFFFFF;
-	text-shadow: #000000 3px 3px 3px;
-}
-
 p {
 	background-color: #ADD8FF;
 	width: 620px;
@@ -21,8 +15,4 @@ p {
 	border: 1px solid #000000;
 	border-radius: 10px;
 	box-shadow: 8px 8px 5px #111155;
-}
-
-#extras {
-	display: none;
 }

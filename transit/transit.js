@@ -18,7 +18,7 @@ function getLocation() {
 		});
 	}
 	else {
-		alert("Geolocation is not supported by your subpar browser. Sucks to suck!");
+		alert("Unable to access your location. Please enable location services or try another browser.");
 	}
 }
 
@@ -69,13 +69,20 @@ function placeMe(myAddress) {
 		}
 	});
 
-	xhr = new XMLHttpRequest();
+	// Parse stations data and generate random mbta line
+	stations = JSON.parse(str);
+	mbtaLines = ['red','orange','blue'];
+	lineNumber = Math.floor(Math.random() * 3); // Generate random Number
+	drawLine(mbtaLines[lineNumber]);
+
+	//Make XML request for rodeo.json
+	/*xhr = new XMLHttpRequest();
 	xhr.open("get","http://mbtamap.herokuapp.com/mapper/rodeo.json",true);
 	xhr.onreadystatechange = dataReady;
-	xhr.send(null);
+	xhr.send(null);*/
 }
-	
-function dataReady() {
+
+/*function dataReady() {
 	if(xhr.readyState==4 && xhr.status==200) {
 		scheduleData = JSON.parse(xhr.responseText);
 		stations = JSON.parse(str);
@@ -86,24 +93,24 @@ function dataReady() {
 		xhr.onreadystatechange = dataReady;
 		xhr.send(null);
 	}
-}
+}*/
 
-function drawLine() {
-	switch(scheduleData['line']) {
+function drawLine(randomLine) {
+	switch(randomLine /*scheduleData['line']*/) {
 			case 'red':
 				lineName = 'Red';
 				lineColor = '#AA0000';
-				sign = '../transit/assets/redt.png';
+				sign = '../assets/redt.png';
 				break;
 			case 'orange':
 				lineName = 'Orange';
 				lineColor = '#D45500';
-				sign = '../transit/assets/oranget.png';
+				sign = '../assets/oranget.png';
 				break;
 			case 'blue':
 				lineName = 'Blue';
 				lineColor = '#0044AA';
-				sign = '../transit/assets/bluet.png';
+				sign = '../assets/bluet.png';
 				break;
 			default:
 				alert("Houston, we have a problem.");
@@ -124,7 +131,7 @@ function drawLine() {
 				position: tStop,
 				map: map,
 				title: stations[i]['station'],
-				icon: stationMark 
+				icon: stationMark
 			});
 			linePath[j] = tStop;
 			stopName[j] = stopMarker.title;
@@ -132,13 +139,15 @@ function drawLine() {
 			google.maps.event.addListener(stopMarker, 'click', function() {
 				stopWindow.close();
 				infoWindow.close();
-				schedule = getSchedule(this.title);
-				schedule.sort(compare);
-				stopContent = '<h3>' + this.title + '</h3><table><thead><tr><td>Destination</td><td>Arriving in...</td></tr></thead>';
-				for (var k=0; k<schedule.length; k++) {
+				stopDist = haversine(myLoc.lat(),myLoc.lng(),this.position.lat(),this.position.lng());
+				stopDist = stopDist.round(2); // round distance to 2 decimal places
+				/*schedule = getSchedule(this.title);
+				schedule.sort(compare);*/
+				stopContent = '<h3>' + this.title + ' ' + '</h3><p>' + stopDist + ' miles away.</p>'; //'<table><thead><tr><td>Destination</td><td>Arriving in...</td></tr></thead>';
+				/*for (var k=0; k<schedule.length; k++) {
 					stopContent += '<tr><td>' + schedule[k].dest + '</td><td>' + Math.floor(schedule[k]['min']) + ':' + schedule[k].sec + '</td></tr>';
 				}
-				stopContent += '</table>';
+				stopContent += '</table>';*/
 				stopWindow.setContent(stopContent);
 				stopWindow.open(map, this);
 			});
@@ -189,7 +198,7 @@ function drawLine() {
 	findNearest();
 }
 
-function getSchedule(stationStop) {
+/*function getSchedule(stationStop) {
 	var tableData = [];
 	k=0; //length of tableData array
 	for (var i=0; i<scheduleData.schedule.length; i++) {
@@ -208,21 +217,21 @@ function getSchedule(stationStop) {
 		}
 	}
 	return tableData;
-}
+}*/
 
 function findNearest() {
 	nearest = 25000; // Earth's circumference is 24,901 miles
 	nStop = 'a';     // nearest stop
 	nIndex = 50;     // no line has 50 stops (arbitrary)
 	for (var i = 0; i<linePath.length; i++) {
-		dist = haversine(myLoc.k,myLoc.A,linePath[i].k,linePath[i].A);
+		dist = haversine(myLoc.lat(),myLoc.lng(),linePath[i].lat(),linePath[i].lng());
 		if (dist < nearest) {
 			nearest = dist;
 			nStop = stopName[i];
 			nIndex = i;
 		}
 	}
-	nearest = nearest.round(3);
+	nearest = nearest.round(2);
 	nearestContent = '<p>The nearest station is <strong>' + nStop + '</strong>, which is ' + nearest + ' miles away.</p>';
 	infoWindow.setContent(initInfoContent + nearestContent);
 	infoWindow.open(map, marker);
@@ -249,8 +258,8 @@ function haversine(lat1, lon1, lat2, lon2) {
 	var lat2 = toRad(lat2);
 
 	var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-			  Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
-	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+			  Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
+	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 	var d = R * c;
 	return d;
 }
