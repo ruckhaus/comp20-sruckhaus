@@ -100,17 +100,17 @@ function drawLine(randomLine) {
 			case 'red':
 				lineName = 'Red';
 				lineColor = '#AA0000';
-				sign = '../assets/redt.png';
+				sign = '../transit/assets/redt.png';
 				break;
 			case 'orange':
 				lineName = 'Orange';
 				lineColor = '#D45500';
-				sign = '../assets/oranget.png';
+				sign = '../transit/assets/oranget.png';
 				break;
 			case 'blue':
 				lineName = 'Blue';
 				lineColor = '#0044AA';
-				sign = '../assets/bluet.png';
+				sign = '../transit/assets/bluet.png';
 				break;
 			default:
 				alert("Houston, we have a problem.");
