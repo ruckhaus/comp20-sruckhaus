@@ -6,10 +6,7 @@ function initialize() {
 		zoom: 13
    };
 	map = new google.maps.Map(document.getElementById("mapcanvas"),mapOptions);
-	//getLocation();
-	//Temp location due to https issues
-	myLoc = new google.maps.LatLng(42.3581, -71.0636);
-	renderMap();
+	getLocation();
 }
 
 function getLocation() {
@@ -26,7 +23,7 @@ function getLocation() {
 }
 
 function renderMap() {
-	//myLoc = new google.maps.LatLng(lat, lng);
+	myLoc = new google.maps.LatLng(lat, lng);
 	map.panTo(myLoc);
 	marker = new google.maps.Marker({
 		position: myLoc,
